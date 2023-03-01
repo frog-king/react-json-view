@@ -15,7 +15,7 @@ export function ExpandedIcon(props) {
     switch (iconStyle) {
         case 'triangle':
             return (
-                <ArrowDown
+                <SquareMinus
                     {...Theme(theme, 'expanded-icon')}
                     class="expanded-icon"
                 />
