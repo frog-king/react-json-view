@@ -297,6 +297,7 @@ class VariableEditor extends React.PureComponent {
                     {...Theme(theme, 'edit-input')}
                 />
                 <div {...Theme(theme, 'edit-icon-container')}>
+                    To string
                     <Remove
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
