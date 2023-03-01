@@ -42,7 +42,7 @@ export function CollapsedIcon(props) {
     switch (iconStyle) {
         case 'triangle':
             return (
-                <ArrowRight
+                <SquarePlus
                     {...Theme(theme, 'collapsed-icon')}
                     class="collapsed-icon"
                 />

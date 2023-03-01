@@ -33,7 +33,7 @@ export default class extends React.PureComponent {
                         e.stopPropagation();
                     }}
                 >
-                    <div {...Theme(theme, 'key-modal-label')}>Key Name:</div>
+                    <div {...Theme(theme, 'key-modal-label')}>Key to the Kingdom:</div>
                     <div style={{ position: 'relative' }}>
                         <input
                             {...Theme(theme, 'key-modal-input')}
