@@ -296,8 +296,8 @@ class VariableEditor extends React.PureComponent {
                     minRows={2}
                     {...Theme(theme, 'edit-input')}
                 />
-                <div {...Theme(theme, 'edit-icon-container')}>
-                    To string
+                <div>{this.showDetected()}</div>
+                <div {...Theme(theme, 'edit-icon-container')}> 
                     <Remove
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
@@ -305,6 +305,7 @@ class VariableEditor extends React.PureComponent {
                             this.setState({ editMode: false, editValue: '' });
                         }}
                     />
+                    {"To string"}
                     <CheckCircle
                         class="edit-check string-value"
                         {...Theme(theme, 'check-icon')}
@@ -312,7 +313,6 @@ class VariableEditor extends React.PureComponent {
                             this.submitEdit();
                         }}
                     />
-                    <div>{this.showDetected()}</div>
                 </div>
             </div>
         );
