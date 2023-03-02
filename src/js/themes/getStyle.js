@@ -274,7 +274,8 @@ const getDefaultThemeStyling = theme => {
         },
         'edit-icon-container': {
             display: 'inline-block',
-            verticalAlign: 'top'
+            position: 'relative',
+            right: '50px'
         },
         'check-icon': {
             display: 'inline-block',
@@ -301,7 +302,9 @@ const getDefaultThemeStyling = theme => {
             fontFamily: constants.editInputFontFamily
         },
         'detected-row': {
-            paddingTop: constants.detectedRowPaddingTop
+            paddingTop: constants.detectedRowPaddingTop,
+            display: 'inline-block',
+            verticalAlign: 'top'
         },
         'key-modal-request': {
             position: constants.addKeyCoverPosition,
