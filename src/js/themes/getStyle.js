@@ -274,7 +274,7 @@ const getDefaultThemeStyling = theme => {
         },
         'edit-icon-container': {
             display: 'inline-block',
-            verticalAlign: 'bottom'
+            verticalAlign: 'top'
         },
         'check-icon': {
             display: 'inline-block',
