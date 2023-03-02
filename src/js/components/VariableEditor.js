@@ -296,7 +296,12 @@ class VariableEditor extends React.PureComponent {
                     minRows={2}
                     {...Theme(theme, 'edit-input')}
                 />
-                <div>{this.showDetected()}</div>
+                <div
+                    style={{
+                        verticalAlign: 'top',
+                        display: 'inline-block'
+                    }}
+                >{this.showDetected()}</div>
                 <div {...Theme(theme, 'edit-icon-container')}> 
                     <Remove
                         class="edit-cancel"
