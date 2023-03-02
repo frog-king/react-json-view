@@ -305,7 +305,6 @@ class VariableEditor extends React.PureComponent {
                             this.setState({ editMode: false, editValue: '' });
                         }}
                     />
-                    {"Convert to string"}
                     <CheckCircle
                         class="edit-check string-value"
                         {...Theme(theme, 'check-icon')}
@@ -313,6 +312,7 @@ class VariableEditor extends React.PureComponent {
                             this.submitEdit();
                         }}
                     />
+                    {"Convert to string"}
                 </div>
             </div>
         );
