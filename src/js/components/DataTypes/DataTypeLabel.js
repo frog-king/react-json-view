@@ -12,7 +12,10 @@ export default class extends React.PureComponent {
                     class="data-type-label"
                     {...Theme(theme, 'data-type-label')}
                 >
-                    {type_name}
+                    <select value={type_name}>
+                        <option value="boolean">Boolean</option>
+                        <option value="string">String</option>
+                    </select>
                 </span>
             );
         }
