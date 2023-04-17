@@ -127,7 +127,8 @@ class VariableEditor extends React.PureComponent {
                         cursor: onSelect === false ? 'default' : 'pointer'
                     })}
                 >
-                    {this.getValue(variable, editMode)}
+                    //{this.getValue(variable, editMode)}
+                    {editMode == true && this.getEditInput(variable)}
                 </div>
                 {enableClipboard ? (
                     <CopyToClipboard
@@ -217,7 +218,8 @@ class VariableEditor extends React.PureComponent {
     };
 
     getValue = (variable, editMode) => {
-        const type = editMode ? false : variable.type;
+        //const type = editMode ? false : variable.type;
+        const type = variable.type;
         const { props } = this;
         switch (type) {
             case false:
@@ -252,7 +254,7 @@ class VariableEditor extends React.PureComponent {
         }
     };
 
-    getEditInput = () => {
+    getEditInput = (variable) => {
         const { theme } = this.props;
         const { editValue } = this.state;
 
