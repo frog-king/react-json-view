@@ -217,7 +217,7 @@ class VariableEditor extends React.PureComponent {
     };
 
     getValue = (variable, editMode) => {
-        const type = editMode ? true : variable.type;
+        const type = editMode ? false : variable.type;
         const { props } = this;
         switch (type) {
             case false:
