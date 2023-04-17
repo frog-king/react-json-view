@@ -127,8 +127,7 @@ class VariableEditor extends React.PureComponent {
                         cursor: onSelect === false ? 'default' : 'pointer'
                     })}
                 >
-                    //{this.getValue(variable, editMode)}
-                    {editMode == true && this.getEditInput(variable)}
+                    {this.getValue(variable, editMode)}
                 </div>
                 {enableClipboard ? (
                     <CopyToClipboard

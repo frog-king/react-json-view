@@ -5,8 +5,8 @@ import Theme from './../../themes/getStyle';
 
 export default class extends React.PureComponent {
     render() {
-        const { rjvId, type_name, displayDataTypes, theme } = this.props;
-        if (displayDataTypes) {
+        const { rjvId, type_name, displayDataTypes, theme, editMode } = this.props;
+        if (editMode) {
             return (
                 <span
                     class="data-type-label"
