@@ -5,7 +5,8 @@ import Theme from './../../themes/getStyle';
 
 export default class extends React.PureComponent {
     render() {
-        const { rjvId, type_name, displayDataTypes, theme, editMode } = this.props;
+        const { rjvId, type_name, displayDataTypes, theme } = this.props;
+        const {editMode} = this.state;
         if (editMode) {
             return (
                 <span
