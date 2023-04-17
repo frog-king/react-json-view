@@ -217,7 +217,7 @@ class VariableEditor extends React.PureComponent {
     };
 
     getValue = (variable, editMode) => {
-        const type = editMode ? false : variable.type;
+        const type = editMode ? true : variable.type;
         const { props } = this;
         switch (type) {
             case false:
@@ -296,12 +296,7 @@ class VariableEditor extends React.PureComponent {
                     minRows={2}
                     {...Theme(theme, 'edit-input')}
                 />
-                <div
-                    style={{
-                        verticalAlign: 'top',
-                        display: 'inline-block'
-                    }}
-                >{this.showDetected()}</div>
+                {/* <div>{this.showDetected()}</div> */}
                 <div {...Theme(theme, 'edit-icon-container')}> 
                     <Remove
                         class="edit-cancel"
@@ -317,7 +312,6 @@ class VariableEditor extends React.PureComponent {
                             this.submitEdit();
                         }}
                     />
-                    {"Convert to string"}
                 </div>
             </div>
         );
