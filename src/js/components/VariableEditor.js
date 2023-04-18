@@ -316,7 +316,6 @@ class VariableEditor extends React.PureComponent {
                     name="Types"
                     defaultValue={({ label: variable.type, value: variable.type })}
                     onChange={(val) => onChange(val ? val.value : '')}
-                    {...rest}
                 />
                 <select id="type">
                     <option value="string">String</option>
