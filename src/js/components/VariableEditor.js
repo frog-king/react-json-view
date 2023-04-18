@@ -48,6 +48,7 @@ class VariableEditor extends React.PureComponent {
             editValue: '',
             hovered: false,
             renameKey: false,
+            inputType: '',
             parsedInput: {
                 type: false,
                 value: null
@@ -265,9 +266,9 @@ class VariableEditor extends React.PureComponent {
         }
     };
 
-    handleChange = (type) => {
-        // this.setState({parsedInput: {type: type.value, value: type.value}});
-        console.debug('TYPE CHOSEN', type);
+    handleChange = (type) => {  
+        this.setState({inputType: type.value});
+        console.debug('TYPE CHOSEN', inputType);
     };
 
     getEditInput = () => {
@@ -327,6 +328,7 @@ class VariableEditor extends React.PureComponent {
                 />
                 {/* <div>{this.showDetected()}</div> */}
                 <div {...Theme(theme, 'edit-icon-container')}> 
+                    Cancel
                     <Remove
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
@@ -334,6 +336,7 @@ class VariableEditor extends React.PureComponent {
                             this.setState({ editMode: false, editValue: '' });
                         }}
                     />
+                    Accept
                     <CheckCircle
                         class="edit-check string-value"
                         {...Theme(theme, 'check-icon')}
