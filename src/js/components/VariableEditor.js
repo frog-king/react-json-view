@@ -266,7 +266,8 @@ class VariableEditor extends React.PureComponent {
     };
 
     handleChange = (type) => {
-        this.setState({parsedInput: {type: type}});
+        // this.setState({parsedInput: {type: type.value, value: type.value}});
+        console.debug('TYPE CHOSEN', type);
     };
 
     getEditInput = () => {
@@ -317,7 +318,6 @@ class VariableEditor extends React.PureComponent {
                     {...Theme(theme, 'edit-input')}
                 />
                 <Select
-                    value={parsedInput}
                     onChange={this.handleChange}
                     blurInputOnSelect
                     options={Types}
