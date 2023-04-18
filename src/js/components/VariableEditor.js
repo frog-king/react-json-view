@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import AutosizeTextarea from 'react-textarea-autosize';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
@@ -345,6 +345,7 @@ class VariableEditor extends React.PureComponent {
                             this.submitEdit();
                         }}
                     />
+                    <ToastContainer />
                 </div>
             </div>
         );
