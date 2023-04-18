@@ -255,7 +255,9 @@ class VariableEditor extends React.PureComponent {
     getEditInput = () => {
         const { variable, theme } = this.props;
         const { editValue } = this.state;
-        console.debug('VARIABLE', variable);
+        const t = variable.type;
+        // <option value="string" {...t === "string" && selected}>String</option>
+        // <option value="boolean" {...t === "boolean" && selected}>Boolean</option>
         return (
             <div>
                 <AutosizeTextarea
@@ -297,7 +299,7 @@ class VariableEditor extends React.PureComponent {
                     {...Theme(theme, 'edit-input')}
                 />
 
-                <select value={variable.value}>
+                <select id="type">
                     <option value="string">String</option>
                     <option value="boolean">Boolean</option>
                     <option value="integer">Integer</option>
