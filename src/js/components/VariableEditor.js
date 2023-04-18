@@ -127,7 +127,6 @@ class VariableEditor extends React.PureComponent {
                         cursor: onSelect === false ? 'default' : 'pointer'
                     })}
                 >
-                    {editMode && this.getEditInput}
                     {this.getValue(variable, editMode)}
                 </div>
                 {enableClipboard ? (
@@ -218,8 +217,7 @@ class VariableEditor extends React.PureComponent {
     };
 
     getValue = (variable, editMode) => {
-        //const type = editMode ? false : variable.type;
-        const type = variable.type;
+        const type = editMode ? false : variable.type;
         const { props } = this;
         switch (type) {
             case false:
@@ -298,7 +296,17 @@ class VariableEditor extends React.PureComponent {
                     minRows={2}
                     {...Theme(theme, 'edit-input')}
                 />
-                <DataTypeLabel type_name={variable.value} {...props} />
+                <select value={variable.value}>
+                    <option value="string">String</option>
+                    <option value="boolean">Boolean</option>
+                    <option value="integer">Integer</option>
+                    <option value="float">Float</option>
+                    <option value="date">Date</option>
+                    <option value="array">Array</option>
+                    <option value="object">Object</option>
+                    <option value="regexp">Regexp</option>
+                    <option value="null">Null</option>                  
+                </select>
                 {/* <div>{this.showDetected()}</div> */}
                 <div {...Theme(theme, 'edit-icon-container')}> 
                     <Remove
