@@ -48,7 +48,7 @@ class VariableEditor extends React.PureComponent {
             editValue: '',
             hovered: false,
             renameKey: false,
-            inputType: props.variable.type,
+            inputType: false,
             parsedInput: {
                 type: false,
                 value: null
@@ -72,6 +72,7 @@ class VariableEditor extends React.PureComponent {
             quotesOnKeys
         } = this.props;
         const { editMode } = this.state;
+        this.setState({inputType: variable.type});
         return (
             <div
                 {...Theme(theme, 'objectKeyVal', {
