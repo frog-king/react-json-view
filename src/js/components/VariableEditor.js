@@ -375,8 +375,8 @@ class VariableEditor extends React.PureComponent {
                 }
             });
         } else {
-            toast("Error adding variable.  Type not identified.", {
-                type: "error",
+            toast.error("Error adding variable.  Type not identified.", {
+                position: "top-center",
                 autoClose: 5000,
             });
             console.debug('DID NOT WORK!');
