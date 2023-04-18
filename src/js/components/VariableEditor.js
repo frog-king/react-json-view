@@ -253,21 +253,6 @@ class VariableEditor extends React.PureComponent {
         }
     };
 
-    getTypes = () => {
-		
-		return ({
-            label: "String", value: "string",
-            label: "Boolean", value: "boolean",
-            label: "Integer", value: "integer",
-            label: "Float", value: "float",
-            label: "Date", value: "date",
-            Label: "Array", value: "array",
-            Label: "Object", value: "object",
-            Label: "Regexp", value: "regexp",
-            Label: "Null", value: "null",
-		});
-	};
-
     getEditInput = () => {
         const { variable, theme } = this.props;
         const { editValue } = this.state;
@@ -352,6 +337,21 @@ class VariableEditor extends React.PureComponent {
             </div>
         );
     };
+
+    getTypes = () => {
+		
+		return ({
+            label: "String", value: "string",
+            label: "Boolean", value: "boolean",
+            label: "Integer", value: "integer",
+            label: "Float", value: "float",
+            label: "Date", value: "date",
+            Label: "Array", value: "array",
+            Label: "Object", value: "object",
+            Label: "Regexp", value: "regexp",
+            Label: "Null", value: "null",
+		});
+	};
 
     submitEdit = submit_detected => {
         const { variable, namespace, rjvId } = this.props;
