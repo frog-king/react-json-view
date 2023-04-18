@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import AutosizeTextarea from 'react-textarea-autosize';
+import { toast } from 'react-toastify';
 
 import { toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
@@ -374,6 +375,10 @@ class VariableEditor extends React.PureComponent {
                 }
             });
         } else {
+            toast("Error adding variable.  Type not identified.", {
+                type: "error",
+                autoClose: 5000,
+            });
             console.debug('DID NOT WORK!');
         }
     };

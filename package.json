@@ -8,7 +8,9 @@
         "flux": "^4.0.1",
         "react-base16-styling": "^0.6.0",
         "react-lifecycles-compat": "^3.0.4",
-        "react-textarea-autosize": "^8.3.2"
+        "react-select": "^5.7.0",
+        "react-textarea-autosize": "^8.3.2",
+        "react-toastify": "^8.0.0"
     },
     "devDependencies": {
         "@babel/eslint-parser": "^7.12.1",
