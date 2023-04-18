@@ -267,11 +267,7 @@ class VariableEditor extends React.PureComponent {
     };
 
     handleChange = (type) => {  
-        const l = this.state.inputType;
-        console.debug('firsttype', l);
         this.setState({inputType: type.value});
-        const m = this.state.inputType;
-        console.debug('firsttype', m);
     };
 
     getEditInput = () => {
@@ -354,7 +350,8 @@ class VariableEditor extends React.PureComponent {
 
     submitEdit = submit_detected => {
         const { variable, namespace, rjvId } = this.props;
-        const { editValue, parsedInput } = this.state;
+        const { editValue, parsedInput, inputType } = this.state;
+        console.debug('Type Chosen is ', inputType);
         let new_value = editValue;
         if (submit_detected && parsedInput.type) {
             new_value = parsedInput.value;
