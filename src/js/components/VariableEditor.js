@@ -265,13 +265,16 @@ class VariableEditor extends React.PureComponent {
         }
     };
 
+    handleChange = (type) => {
+        this.setState({parsedInput: {type: type}});
+    };
+
     getEditInput = () => {
         const { variable, theme } = this.props;
         const { editValue, parsedInput } = this.state;
         console.debug('variable', variable);
         console.debug('editValue', editValue);
         console.debug('parsedInput', parsedInput);
-        console.debug('chosen', document.getElementById("type-select").value);
 
         return (
             <div>
@@ -283,7 +286,6 @@ class VariableEditor extends React.PureComponent {
                     onChange={event => {
                         const value = event.target.value;
                         const detected = parseInput(value);
-                        let chosen = document.getElementById("type-select").value;
                         this.setState({
                             editValue: value,
                             parsedInput: {
@@ -315,7 +317,8 @@ class VariableEditor extends React.PureComponent {
                     {...Theme(theme, 'edit-input')}
                 />
                 <Select
-                    id="type-select"
+                    value={parsedInput}
+                    onChange={this.handleChange}
                     blurInputOnSelect
                     options={Types}
                     name="Types"
