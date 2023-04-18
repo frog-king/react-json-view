@@ -253,9 +253,9 @@ class VariableEditor extends React.PureComponent {
     };
 
     getEditInput = () => {
-        const { theme } = this.props;
+        const { variable, theme } = this.props;
         const { editValue } = this.state;
-
+        console.debug('VARIABLE', variable);
         return (
             <div>
                 <AutosizeTextarea
@@ -296,12 +296,8 @@ class VariableEditor extends React.PureComponent {
                     minRows={2}
                     {...Theme(theme, 'edit-input')}
                 />
-                console.debug('VARIABLE', variable);
-                <select value="string">
-                    <option value="string">String</option>
-                    <option value="boolean">Boolean</option>
-                </select>
-                {/* <select value={variable.value}>
+
+                <select value={variable.value}>
                     <option value="string">String</option>
                     <option value="boolean">Boolean</option>
                     <option value="integer">Integer</option>
@@ -311,7 +307,7 @@ class VariableEditor extends React.PureComponent {
                     <option value="object">Object</option>
                     <option value="regexp">Regexp</option>
                     <option value="null">Null</option>                  
-                </select> */}
+                </select>
                 {/* <div>{this.showDetected()}</div> */}
                 <div {...Theme(theme, 'edit-icon-container')}> 
                     <Remove
