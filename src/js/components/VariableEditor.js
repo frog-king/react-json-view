@@ -28,6 +28,18 @@ import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 //theme
 import Theme from './../themes/getStyle';
 
+const Types = {
+    string: "String",
+    boolean: "Boolean",
+    integer: "Integer",
+    float: "Float",
+    date: "Date",
+    array: "Array",
+    object: "Object",
+    regexp: "Regexp",
+    null: "Null",
+}
+
 class VariableEditor extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -300,7 +312,7 @@ class VariableEditor extends React.PureComponent {
                 <Select
                     id="type-select"
                     blurInputOnSelect
-                    options={getTypes()}
+                    options={Object.keys(Types).map((type) => ({ value: type, label: type }))}
                     name="Types"
                     defaultValue={({ label: variable.type, value: variable.type })}
                     onChange={(val) => onChange(val ? val.value : '')}
@@ -337,21 +349,6 @@ class VariableEditor extends React.PureComponent {
             </div>
         );
     };
-
-    getTypes = () => {
-		
-		return ({
-            label: "String", value: "string",
-            label: "Boolean", value: "boolean",
-            label: "Integer", value: "integer",
-            label: "Float", value: "float",
-            label: "Date", value: "date",
-            Label: "Array", value: "array",
-            Label: "Object", value: "object",
-            Label: "Regexp", value: "regexp",
-            Label: "Null", value: "null",
-		});
-	};
 
     submitEdit = submit_detected => {
         const { variable, namespace, rjvId } = this.props;
