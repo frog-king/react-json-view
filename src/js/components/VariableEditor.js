@@ -267,6 +267,7 @@ class VariableEditor extends React.PureComponent {
     };
 
     handleChange = (type) => {  
+        const { inputType } = this.state;
         this.setState({inputType: type.value});
         console.debug('TYPE CHOSEN', inputType);
     };
@@ -335,7 +336,7 @@ class VariableEditor extends React.PureComponent {
                         onClick={() => {
                             this.setState({ editMode: false, editValue: '' });
                         }}
-                    />
+                    />{'  '}
                     Accept
                     <CheckCircle
                         class="edit-check string-value"
