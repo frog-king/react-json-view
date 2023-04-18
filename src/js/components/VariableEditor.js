@@ -28,17 +28,17 @@ import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 //theme
 import Theme from './../themes/getStyle';
 
-const Types = {
-    string: "String",
-    boolean: "Boolean",
-    integer: "Integer",
-    float: "Float",
-    date: "Date",
-    array: "Array",
-    object: "Object",
-    regexp: "Regexp",
-    null: "Null",
-}
+const Types = [
+    { value: "string", label: "String" },
+    { value: "boolean", label: "Boolean" },
+    { value: "integer", label: "Integer" },
+    { value: "float", label: "Float" },
+    { value: "date", label: "Date" },
+    { value: "array", label: "Array" },
+    { value: "object", label: "Object" },
+    { value: "regexp", label: "Regexp" },
+    { value: "null", label: "Null" },
+]
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -267,7 +267,11 @@ class VariableEditor extends React.PureComponent {
 
     getEditInput = () => {
         const { variable, theme } = this.props;
-        const { editValue } = this.state;
+        const { editValue, parsedInput } = this.state;
+        console.debug('variable', variable);
+        console.debug('editValue', editValue);
+        console.debug('parsedInput', parsedInput);
+        console.debug('chosen', document.getElementById("type-select").value);
 
         return (
             <div>
@@ -279,6 +283,7 @@ class VariableEditor extends React.PureComponent {
                     onChange={event => {
                         const value = event.target.value;
                         const detected = parseInput(value);
+                        let chosen = document.getElementById("type-select").value;
                         this.setState({
                             editValue: value,
                             parsedInput: {
@@ -312,22 +317,10 @@ class VariableEditor extends React.PureComponent {
                 <Select
                     id="type-select"
                     blurInputOnSelect
-                    options={Object.keys(Types).map((type) => ({ value: type, label: type }))}
+                    options={Types}
                     name="Types"
                     defaultValue={({ label: variable.type, value: variable.type })}
-                    onChange={(val) => onChange(val ? val.value : '')}
                 />
-                <select id="type">
-                    <option value="string">String</option>
-                    <option value="boolean">Boolean</option>
-                    <option value="integer">Integer</option>
-                    <option value="float">Float</option>
-                    <option value="date">Date</option>
-                    <option value="array">Array</option>
-                    <option value="object">Object</option>
-                    <option value="regexp">Regexp</option>
-                    <option value="null">Null</option>                  
-                </select>
                 {/* <div>{this.showDetected()}</div> */}
                 <div {...Theme(theme, 'edit-icon-container')}> 
                     <Remove
