@@ -300,8 +300,8 @@ class VariableEditor extends React.PureComponent {
                 />
 
                 <select id="type">
-                    <option value="boolean">Boolean</option>
-                    <option value="string">String</option>
+                    <option value="boolean" {...t === "boolean" && selected}>Boolean</option>
+                    <option value="string" {...t === "string" && selected}>String</option>
                     <option value="integer">Integer</option>
                     <option value="float">Float</option>
                     <option value="date">Date</option>
