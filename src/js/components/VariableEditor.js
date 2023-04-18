@@ -275,6 +275,7 @@ class VariableEditor extends React.PureComponent {
         const { editValue, parsedInput } = this.state;
         console.debug('variable', variable);
         console.debug('editValue', editValue);
+        console.debug('type', typeof(editValue));
         console.debug('parsedInput', parsedInput);
 
         return (
