@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select';
 import AutosizeTextarea from 'react-textarea-autosize';
 
 import { toType } from './../helpers/util';
@@ -252,12 +253,25 @@ class VariableEditor extends React.PureComponent {
         }
     };
 
+    getTypes = () => {
+		
+		return ({
+            label: "String", value: "string",
+            label: "Boolean", value: "boolean",
+            label: "Integer", value: "integer",
+            label: "Float", value: "float",
+            label: "Date", value: "date",
+            Label: "Array", value: "array",
+            Label: "Object", value: "object",
+            Label: "Regexp", value: "regexp",
+            Label: "Null", value: "null",
+		});
+	};
+
     getEditInput = () => {
         const { variable, theme } = this.props;
         const { editValue } = this.state;
-        const t = variable.type;
-        // <option value="string" {...t === "string" && selected}>String</option>
-        // <option value="boolean" {...t === "boolean" && selected}>Boolean</option>
+
         return (
             <div>
                 <AutosizeTextarea
@@ -298,10 +312,18 @@ class VariableEditor extends React.PureComponent {
                     minRows={2}
                     {...Theme(theme, 'edit-input')}
                 />
-
+                <Select
+                    id="type-select"
+                    blurInputOnSelect
+                    options={getTypes()}
+                    name="Types"
+                    defaultValue={({ label: variable.type, value: variable.type })}
+                    onChange={(val) => onChange(val ? val.value : '')}
+                    {...rest}
+                />
                 <select id="type">
-                    <option value="boolean" {...t === "boolean" && selected}>Boolean</option>
-                    <option value="string" {...t === "string" && selected}>String</option>
+                    <option value="string">String</option>
+                    <option value="boolean">Boolean</option>
                     <option value="integer">Integer</option>
                     <option value="float">Float</option>
                     <option value="date">Date</option>
