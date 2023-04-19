@@ -49,7 +49,7 @@ class VariableEditor extends React.PureComponent {
             editValue: '',
             hovered: false,
             renameKey: false,
-            inputType: props.variable.type,
+            inputType: props.variable.type || '',
             parsedInput: {
                 type: false,
                 value: null
@@ -274,11 +274,12 @@ class VariableEditor extends React.PureComponent {
 
     getEditInput = () => {
         const { variable, theme } = this.props;
-        const { editValue, parsedInput } = this.state;
+        const { editValue, parsedInput, inputType } = this.state;
         console.debug('variable', variable);
         console.debug('editValue', editValue);
         console.debug('type', typeof(editValue));
         console.debug('parsedInput', parsedInput);
+        console.debug('input type', inputType);
 
         return (
             <div>
