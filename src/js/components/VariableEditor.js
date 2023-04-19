@@ -356,11 +356,11 @@ class VariableEditor extends React.PureComponent {
         const { editValue, parsedInput, inputType } = this.state;
         const isValid = this.validateInput();
         if (isValid) {
-            console.debug('Type Chosen is ', inputType);
             let new_value = editValue;
-            if (submit_detected && parsedInput.type) {
+            if (parsedInput.type) {
                 new_value = parsedInput.value;
             }
+            console.debug('NEW VALUE IS... ', new_value, ' of type ', parsedInput.type);
             this.setState({
                 editMode: false
             });
@@ -380,11 +380,32 @@ class VariableEditor extends React.PureComponent {
                 position: "top-center",
                 autoClose: 5000,
             });
-            console.debug('DID NOT WORK!');
         }
     };
 
     validateInput = () => {
+        const { editValue, parsedInput, inputType } = this.state;
+        console.debug('Type Chosen is ', inputType);
+        switch (inputType.toLowerCase()) {
+            case 'object':
+                return false;
+            case 'array':
+                return false;
+            case 'string':
+                return true;
+            case 'integer':
+                return false;
+            case 'float':
+                return false;
+            case 'boolean':
+                return false;
+            case 'function':
+                return false;
+            case 'null':
+                return false;
+            case 'date':
+                return false;
+        }
         return false;
     };
 
