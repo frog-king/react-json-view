@@ -390,7 +390,8 @@ class VariableEditor extends React.PureComponent {
     validateInput = () => {
         const { editValue, parsedInput, inputType } = this.state;
         console.debug('Type Chosen is ', inputType);
-        const detected = parseInput(value);
+        const detected = parseInput(editValue);
+        console.debug('DETECTED', detected);
 
         switch (inputType.toLowerCase()) {
             case 'object':
@@ -406,7 +407,7 @@ class VariableEditor extends React.PureComponent {
                 // });
                 return true;
             case 'integer':
-                if (!isNaN(detected.value)) {
+                if (!isNaN(detected?.value)) {
                     this.setState({ editValue: dected.value });
                     return true;
                 }
