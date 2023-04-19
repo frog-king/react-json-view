@@ -408,7 +408,7 @@ class VariableEditor extends React.PureComponent {
                 return true;
             case 'integer':
                 if (!isNaN(detected?.value)) {
-                    this.setState({ editValue: dected.value });
+                    this.setState({ editValue: detected.value });
                     return true;
                 }
                 
