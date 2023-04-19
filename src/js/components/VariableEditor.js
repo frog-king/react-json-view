@@ -392,6 +392,12 @@ class VariableEditor extends React.PureComponent {
             case 'array':
                 return false;
             case 'string':
+                this.setState({
+                    parsedInput: {
+                        ...parsedInput,
+                        type: inputType
+                    }
+                });
                 return true;
             case 'integer':
                 return false;
