@@ -56,7 +56,7 @@
     "scripts": {
         "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
         "prebuild": "SET NODE_ENV=test npm run test:unit",
-        "build:demo": "SET NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
+        "build:demo": "cross-env NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
         "dev": "SET NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
         "modules:debug": "./docker/debug.sh",
         "modules:tree": "webpack --config webpack/webpack.config.js --json ",

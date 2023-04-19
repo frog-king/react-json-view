@@ -282,10 +282,13 @@ class VariableEditor extends React.PureComponent {
 
         return (
             <div>
-                <select>
+                <select
+                    onChange={e => this.setState({editValue: e.target.value})}
+                >
                     <option value="true">True</option>
                     <option value="false">False</option>
                 </select>
+                {inputType !== 'boolean' && 
                 <AutosizeTextarea
                     type="text"
                     ref={input => input && input.focus()}
@@ -323,7 +326,7 @@ class VariableEditor extends React.PureComponent {
                     placeholder="update this value"
                     minRows={2}
                     {...Theme(theme, 'edit-input')}
-                />
+                />}
                 <Select
                     onChange={this.handleChange}
                     blurInputOnSelect
