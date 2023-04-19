@@ -283,12 +283,13 @@ class VariableEditor extends React.PureComponent {
 
         return (
             <div>
+                {inputType === 'boolean' && 
                 <select
                     onChange={e => this.setState({editValue: e.target.value})}
                 >
                     <option value="true">True</option>
                     <option value="false">False</option>
-                </select>
+                </select>}
                 {inputType !== 'boolean' && 
                 <AutosizeTextarea
                     type="text"
@@ -418,7 +419,7 @@ class VariableEditor extends React.PureComponent {
                     return true;
                 }
             case 'boolean':
-                return false;
+                return true;
             case 'function':
                 return false;
             case 'null':
