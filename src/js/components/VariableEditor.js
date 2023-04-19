@@ -287,7 +287,7 @@ class VariableEditor extends React.PureComponent {
             <div>
                 {inputType === 'boolean' && 
                 <select
-                    onChange={e => this.setState({editValue: !!(e.target.value)})}
+                    onChange={e => this.setState({editValue: e.target.value})}
                 >
                     <option value="true">True</option>
                     <option value="false">False</option>
