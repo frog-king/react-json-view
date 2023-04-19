@@ -190,6 +190,8 @@ class VariableEditor extends React.PureComponent {
         if (this.props.onEdit !== false) {
             const stringifiedValue = stringifyVariable(variable.value);
             const detected = parseInput(stringifiedValue);
+            console.debug('PREPOP', detected);
+            console.debug(stringifiedValue);
             this.setState({
                 editMode: true,
                 editValue: stringifiedValue,
@@ -372,6 +374,9 @@ class VariableEditor extends React.PureComponent {
                 console.debug('setting to parsed');
                 new_value = parsedInput.value;
             }
+            if (inputType === 'boolean') {
+                new_value = !!editValue;
+            }
 
             console.debug('NEW VALUE IS... ', new_value, ' of type ', parsedInput.type);
             console.debug('type off ', typeof(new_value));
@@ -400,7 +405,7 @@ class VariableEditor extends React.PureComponent {
     validateInput = () => {
         const { editValue, parsedInput, inputType } = this.state;
         console.debug('Type Chosen is ', inputType);
-        const detected = parseInput(editValue);
+        const detected = parseInput(stringifyVariable(editValue));
         console.debug('DETECTED', detected);
 
         switch (inputType.toLowerCase()) {
