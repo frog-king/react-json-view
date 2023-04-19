@@ -282,6 +282,10 @@ class VariableEditor extends React.PureComponent {
 
         return (
             <div>
+                <select>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
                 <AutosizeTextarea
                     type="text"
                     ref={input => input && input.focus()}
