@@ -359,7 +359,7 @@ class VariableEditor extends React.PureComponent {
         console.debug('type off edit ', typeof(editValue));
         if (isValid) {
             let new_value = editValue;
-            if (parsedInput.type && parsedInput.type !== 'string') {
+            if (parsedInput.type && inputType !== 'string') {
                 console.debug('setting to parsed');
                 new_value = parsedInput.value;
             }
@@ -400,20 +400,11 @@ class VariableEditor extends React.PureComponent {
             case 'array':
                 return false;
             case 'string':
-                // this.setState({
-                //     parsedInput: {
-                //         ...parsedInput,
-                //         type: inputType
-                //     }
-                // });
                 return true;
             case 'integer':
                 if (!isNaN(detected?.value)) {
-                    console.debug('this is a number!');
-                    this.setState({ editValue: Number(detected.value) });
                     return true;
                 }
-                
             case 'float':
                 if (!isNaN(editValue)) {
                     return true;
