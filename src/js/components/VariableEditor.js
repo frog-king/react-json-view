@@ -352,15 +352,19 @@ class VariableEditor extends React.PureComponent {
     };
 
     submitEdit = submit_detected => {
+
+        const isValid = this.validateInput();
         const { variable, namespace, rjvId } = this.props;
         const { editValue, parsedInput, inputType } = this.state;
-        const isValid = this.validateInput();
         if (isValid) {
             let new_value = editValue;
             if (parsedInput.type) {
+                console.debug('setting to parsed');
                 new_value = parsedInput.value;
             }
+
             console.debug('NEW VALUE IS... ', new_value, ' of type ', parsedInput.type);
+            console.debug('type off ', typeof(new_value));
             this.setState({
                 editMode: false
             });
