@@ -404,9 +404,14 @@ class VariableEditor extends React.PureComponent {
                 });
                 return true;
             case 'integer':
-                return false;
+                if (!isNaN(editValue)) {
+                    return true;
+                }
+                
             case 'float':
-                return false;
+                if (!isNaN(editValue)) {
+                    return true;
+                }
             case 'boolean':
                 return false;
             case 'function':
