@@ -386,8 +386,7 @@ class VariableEditor extends React.PureComponent {
             let new_value = editValue;
             if (inputType === 'boolean') {
                 new_value = editValue === "true";
-            }else 
-            if (parsedInput.type && inputType !== 'string' && inputType !== 'boolean') {
+            }else if (parsedInput.type && inputType !== 'string' && inputType !== 'boolean') {
                 console.debug('setting to parsed');
                 new_value = parsedInput.value;
             }
@@ -420,6 +419,7 @@ class VariableEditor extends React.PureComponent {
     validateInput = () => {
         const { editValue, parsedInput, inputType } = this.state;
         console.debug('Type Chosen is ', inputType);
+        console.debug('edit is', editValue);
         const detected = parseInput(stringifyVariable(editValue));
         console.debug('DETECTED', detected);
 
@@ -428,7 +428,9 @@ class VariableEditor extends React.PureComponent {
                 return false; //ToDo
             case 'array':
                 if (detected.type === 'array') {
+                    
                     let length = detected.value.length;
+                    console.debug('In the array', length);
                     if (detected.value[length-1] === ']'){
                         return true;
                     }
@@ -452,6 +454,7 @@ class VariableEditor extends React.PureComponent {
             case 'date':
                 return false; //ToDo
         }
+        console.debug('returning false!');
         return false;
     };
 
