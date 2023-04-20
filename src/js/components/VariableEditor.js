@@ -277,8 +277,15 @@ class VariableEditor extends React.PureComponent {
 
     handleChange = (type) => {  
         this.setState({inputType: type.value});
+        const { editValue } = this.state;
         if (type.value === 'boolean') {
             this.setState({editValue: 'true'});
+        }
+        if (type.value === 'array') {
+            this.setState({editValue: `[ ${editValue} ]`});
+        }
+        if (type.value === 'object') {
+            this.setState({editValue: `{ ${editValue} }`});
         }
 
     };
