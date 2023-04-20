@@ -41,6 +41,11 @@ const Types = [
     { value: "null", label: "Null" },
 ]
 
+const TrueFalse = [
+    { value: true, label: "True" },
+    { value: false, label: "False"},
+]
+
 class VariableEditor extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -274,6 +279,10 @@ class VariableEditor extends React.PureComponent {
         this.setState({inputType: type.value});
     };
 
+    changeBool = (type) => {
+        this.setState({editValue: type.value});
+    };
+
     getEditInput = () => {
         const { variable, theme } = this.props;
         const { editValue, parsedInput, inputType } = this.state;
@@ -286,12 +295,13 @@ class VariableEditor extends React.PureComponent {
         return (
             <div>
                 {inputType === 'boolean' && 
-                <select
-                    onChange={event => this.setState({editValue: event.target.value})}
-                >
-                    <option value="true">True</option>
-                    <option value="false">False</option>
-                </select>}
+                <Select
+                    onChange={this.changeBool}
+                    blurInputOnSelect
+                    options={TrueFalse}
+                    name="Bools"
+                    defaultValue={({ label: variable.value, value: variable.value })}
+                />}
                 {inputType !== 'boolean' && 
                 <AutosizeTextarea
                     type="text"
