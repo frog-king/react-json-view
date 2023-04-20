@@ -381,16 +381,10 @@ class VariableEditor extends React.PureComponent {
         const isValid = this.validateInput();
         const { variable, namespace, rjvId } = this.props;
         const { editValue, parsedInput, inputType } = this.state;
-        // console.debug('type off edit ', typeof(editValue));
-        // console.debug('edit going in', editValue);
+
         if (isValid) {
             let new_value = editValue;
             if (inputType === 'boolean') {
-                // console.debug('going to boolean', editValue, !!editValue, Boolean(editValue));
-                // let bc = Boolean("false");
-                // let bb = Boolean(editValue);
-                // let bd = editValue === "true";
-                // console.debug('bools are', bc, bb, bd);
                 new_value = editValue === "true";
             }else 
             if (parsedInput.type && inputType !== 'string' && inputType !== 'boolean') {
@@ -431,9 +425,14 @@ class VariableEditor extends React.PureComponent {
 
         switch (inputType.toLowerCase()) {
             case 'object':
-                return false;
+                return false; //ToDo
             case 'array':
-                return false;
+                if (detected.type === 'array') {
+                    let length = detected.value.length;
+                    if (detected.value[length-1] === ']'){
+                        return true;
+                    }
+                } 
             case 'string':
                 return true;
             case 'integer':
@@ -447,11 +446,11 @@ class VariableEditor extends React.PureComponent {
             case 'boolean':
                 return true;
             case 'function':
-                return false;
+                return false; //ToDo
             case 'null':
-                return false;
+                return false; //ToDo
             case 'date':
-                return false;
+                return false; //ToDo
         }
         return false;
     };
