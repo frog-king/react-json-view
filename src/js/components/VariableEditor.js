@@ -300,7 +300,7 @@ class VariableEditor extends React.PureComponent {
                     blurInputOnSelect
                     options={TrueFalse}
                     name="Bools"
-                    defaultValue={({ label: variable.value, value: variable.value })}
+                    defaultValue={({ label: "True", value: "true" })}
                 />}
                 {inputType !== 'boolean' && 
                 <AutosizeTextarea
@@ -381,14 +381,15 @@ class VariableEditor extends React.PureComponent {
         console.debug('edit going in', editValue);
         if (isValid) {
             let new_value = editValue;
-            if (inputType === 'boolean') {
-                console.debug('going to boolean', editValue, !!editValue, new Boolean(editValue));
-                let bc = new Boolean("false");
-                let bb = new Boolean(editValue);
-                let bd = editValue === 'true';
-                console.debug('bools are', bc, bb, bd);
-                new_value = bd;
-            }else if (parsedInput.type && inputType !== 'string') {
+            // if (inputType === 'boolean') {
+            //     console.debug('going to boolean', editValue, !!editValue, Boolean(editValue));
+            //     let bc = Boolean("false");
+            //     let bb = Boolean(editValue);
+            //     let bd = editValue === "true";
+            //     console.debug('bools are', bc, bb, bd);
+            //     new_value = bd;
+            // }else 
+            if (parsedInput.type && inputType !== 'string' && inputType !== 'boolean') {
                 console.debug('setting to parsed');
                 new_value = parsedInput.value;
             }
