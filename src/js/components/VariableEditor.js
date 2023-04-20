@@ -42,8 +42,8 @@ const Types = [
 ]
 
 const TrueFalse = [
-    { value: true, label: "True" },
-    { value: false, label: "False"},
+    { value: "true", label: "True" },
+    { value: "false", label: "False"},
 ]
 
 class VariableEditor extends React.PureComponent {
@@ -277,6 +277,10 @@ class VariableEditor extends React.PureComponent {
 
     handleChange = (type) => {  
         this.setState({inputType: type.value});
+        if (type.value === 'boolean') {
+            this.setState({editValue: 'true'});
+        }
+
     };
 
     changeBool = (type) => {
@@ -381,14 +385,14 @@ class VariableEditor extends React.PureComponent {
         console.debug('edit going in', editValue);
         if (isValid) {
             let new_value = editValue;
-            // if (inputType === 'boolean') {
-            //     console.debug('going to boolean', editValue, !!editValue, Boolean(editValue));
-            //     let bc = Boolean("false");
-            //     let bb = Boolean(editValue);
-            //     let bd = editValue === "true";
-            //     console.debug('bools are', bc, bb, bd);
-            //     new_value = bd;
-            // }else 
+            if (inputType === 'boolean') {
+                console.debug('going to boolean', editValue, !!editValue, Boolean(editValue));
+                let bc = Boolean("false");
+                let bb = Boolean(editValue);
+                let bd = editValue === "true";
+                console.debug('bools are', bc, bb, bd);
+                new_value = true;
+            }else 
             if (parsedInput.type && inputType !== 'string' && inputType !== 'boolean') {
                 console.debug('setting to parsed');
                 new_value = parsedInput.value;
