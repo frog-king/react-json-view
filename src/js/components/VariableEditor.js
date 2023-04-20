@@ -372,8 +372,8 @@ class VariableEditor extends React.PureComponent {
         if (isValid) {
             let new_value = editValue;
             if (inputType === 'boolean') {
-                console.debug('going to boolean', editValue, !!editValue);
-                new_value = !!editValue;
+                console.debug('going to boolean', editValue, !!editValue, Boolean(editValue));
+                new_value = Boolean(editValue);
             }else if (parsedInput.type && inputType !== 'string') {
                 console.debug('setting to parsed');
                 new_value = parsedInput.value;
