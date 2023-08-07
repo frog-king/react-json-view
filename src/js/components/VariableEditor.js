@@ -1,5 +1,7 @@
 import React from 'react';
+import Select from 'react-select';
 import AutosizeTextarea from 'react-textarea-autosize';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
@@ -27,6 +29,23 @@ import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 //theme
 import Theme from './../themes/getStyle';
 
+const Types = [
+    { value: "string", label: "String" },
+    { value: "boolean", label: "Boolean" },
+    { value: "integer", label: "Integer" },
+    { value: "float", label: "Float" },
+    { value: "date", label: "Date" },
+    { value: "array", label: "Array" },
+    { value: "object", label: "Object" },
+    { value: "regexp", label: "Regexp" },
+    { value: "null", label: "Null" },
+]
+
+const TrueFalse = [
+    { value: "true", label: "True" },
+    { value: "false", label: "False"},
+]
+
 class VariableEditor extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -35,6 +54,7 @@ class VariableEditor extends React.PureComponent {
             editValue: '',
             hovered: false,
             renameKey: false,
+            inputType: props.variable.type || '',
             parsedInput: {
                 type: false,
                 value: null
@@ -58,6 +78,7 @@ class VariableEditor extends React.PureComponent {
             quotesOnKeys
         } = this.props;
         const { editMode } = this.state;
+
         return (
             <div
                 {...Theme(theme, 'objectKeyVal', {
@@ -174,6 +195,8 @@ class VariableEditor extends React.PureComponent {
         if (this.props.onEdit !== false) {
             const stringifiedValue = stringifyVariable(variable.value);
             const detected = parseInput(stringifiedValue);
+            console.debug('PREPOP', detected);
+            console.debug(stringifiedValue);
             this.setState({
                 editMode: true,
                 editValue: stringifiedValue,
@@ -252,12 +275,45 @@ class VariableEditor extends React.PureComponent {
         }
     };
 
-    getEditInput = () => {
-        const { theme } = this.props;
+    handleChange = (type) => {  
+        this.setState({inputType: type.value});
         const { editValue } = this.state;
+        if (type.value === 'boolean') {
+            this.setState({editValue: 'true'});
+        }
+        if (type.value === 'array') {
+            this.setState({editValue: `[ ${editValue} ]`});
+        }
+        if (type.value === 'object') {
+            this.setState({editValue: `{ ${editValue} }`});
+        }
+
+    };
+
+    changeBool = (type) => {
+        this.setState({editValue: type.value});
+    };
+
+    getEditInput = () => {
+        const { variable, theme } = this.props;
+        const { editValue, parsedInput, inputType } = this.state;
+        console.debug('variable', variable);
+        console.debug('editValue', editValue);
+        console.debug('type', typeof(editValue));
+        console.debug('parsedInput', parsedInput);
+        console.debug('input type', inputType);
 
         return (
             <div>
+                {inputType === 'boolean' && 
+                <Select
+                    onChange={this.changeBool}
+                    blurInputOnSelect
+                    options={TrueFalse}
+                    name="Bools"
+                    defaultValue={({ label: "True", value: "true" })}
+                />}
+                {inputType !== 'boolean' && 
                 <AutosizeTextarea
                     type="text"
                     ref={input => input && input.focus()}
@@ -295,16 +351,25 @@ class VariableEditor extends React.PureComponent {
                     placeholder="update this value"
                     minRows={2}
                     {...Theme(theme, 'edit-input')}
+                />}
+                <Select
+                    onChange={this.handleChange}
+                    blurInputOnSelect
+                    options={Types}
+                    name="Types"
+                    defaultValue={({ label: variable.type, value: variable.type })}
                 />
-                <div>{this.showDetected()}</div>
+                {/* <div>{this.showDetected()}</div> */}
                 <div {...Theme(theme, 'edit-icon-container')}> 
+                    Cancel
                     <Remove
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
                         onClick={() => {
                             this.setState({ editMode: false, editValue: '' });
                         }}
-                    />
+                    />{'  '}
+                    Accept
                     <CheckCircle
                         class="edit-check string-value"
                         {...Theme(theme, 'check-icon')}
@@ -312,33 +377,92 @@ class VariableEditor extends React.PureComponent {
                             this.submitEdit();
                         }}
                     />
-                    {"Convert to string"}
+                    <ToastContainer />
                 </div>
             </div>
         );
     };
 
     submitEdit = submit_detected => {
+
+        const isValid = this.validateInput();
         const { variable, namespace, rjvId } = this.props;
-        const { editValue, parsedInput } = this.state;
-        let new_value = editValue;
-        if (submit_detected && parsedInput.type) {
-            new_value = parsedInput.value;
-        }
-        this.setState({
-            editMode: false
-        });
-        dispatcher.dispatch({
-            name: 'VARIABLE_UPDATED',
-            rjvId: rjvId,
-            data: {
-                name: variable.name,
-                namespace: namespace,
-                existing_value: variable.value,
-                new_value: new_value,
-                variable_removed: false
+        const { editValue, parsedInput, inputType } = this.state;
+
+        if (isValid) {
+            let new_value = editValue;
+            if (inputType === 'boolean') {
+                new_value = editValue === "true";
+            }else if (parsedInput.type && inputType !== 'string' && inputType !== 'boolean') {
+                console.debug('setting to parsed');
+                new_value = parsedInput.value;
             }
-        });
+            
+
+            console.debug('NEW VALUE IS... ', new_value, ' of type ', parsedInput.type);
+            console.debug('type off ', typeof(new_value));
+            this.setState({
+                editMode: false
+            });
+            dispatcher.dispatch({
+                name: 'VARIABLE_UPDATED',
+                rjvId: rjvId,
+                data: {
+                    name: variable.name,
+                    namespace: namespace,
+                    existing_value: variable.value,
+                    new_value: new_value,
+                    variable_removed: false
+                }
+            });
+        } else {
+            toast.error("Error adding variable.  Type not identified.", {
+                position: "top-center",
+                autoClose: 5000,
+            });
+        }
+    };
+
+    validateInput = () => {
+        const { editValue, parsedInput, inputType } = this.state;
+        console.debug('Type Chosen is ', inputType);
+        console.debug('edit is', editValue);
+        const detected = parseInput(stringifyVariable(editValue));
+        console.debug('DETECTED', detected);
+
+        switch (inputType.toLowerCase()) {
+            case 'object':
+                return false; //ToDo
+            case 'array':
+                if (detected.type === 'array') {
+                    
+                    let length = detected.value.length;
+                    console.debug('In the array', length);
+                    if (detected.value[length-1] === ']'){
+                        return true;
+                    }
+                } 
+            case 'string':
+                return true;
+            case 'integer':
+                if (!isNaN(detected?.value)) {
+                    return true;
+                }
+            case 'float':
+                if (!isNaN(editValue)) {
+                    return true;
+                }
+            case 'boolean':
+                return true;
+            case 'function':
+                return false; //ToDo
+            case 'null':
+                return false; //ToDo
+            case 'date':
+                return false; //ToDo
+        }
+        console.debug('returning false!');
+        return false;
     };
 
     showDetected = () => {

@@ -4,10 +4,13 @@
     "version": "1.21.3",
     "main": "dist/main.js",
     "dependencies": {
+        "cross-env": "^7.0.3",
         "flux": "^4.0.1",
         "react-base16-styling": "^0.6.0",
         "react-lifecycles-compat": "^3.0.4",
-        "react-textarea-autosize": "^8.3.2"
+        "react-select": "^5.7.0",
+        "react-textarea-autosize": "^8.3.2",
+        "react-toastify": "^8.0.0"
     },
     "devDependencies": {
         "@babel/eslint-parser": "^7.12.1",
@@ -28,7 +31,6 @@
         "jsdom": "^16.4.0",
         "mocha": "^8.2.1",
         "moment": "^2.29.1",
-        "node-sass": "^4.14.1",
         "nyc": "^15.1.0",
         "prettier": "^2.2.1",
         "react": "^16.14.0",
@@ -36,7 +38,7 @@
         "react-github-button": "^0.1.11",
         "react-hot-loader": "^4.13.0",
         "react-scripts": "4.0.1",
-        "react-select": "^1.1.0",
+        "react-select": "^5.7.0",
         "react-test-renderer": "^16.14.0",
         "sass-loader": "^10.1.1",
         "sinon": "^9.2.3",
@@ -52,19 +54,19 @@
         "react-dom": "^17.0.0 || ^16.3.0 || ^15.5.4"
     },
     "scripts": {
-        "build": "NODE_ENV=production webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
-        "prebuild": "NODE_ENV=test npm run test:unit",
-        "build:demo": "NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
-        "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
+        "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
+        "prebuild": "SET NODE_ENV=test npm run test:unit",
+        "build:demo": "cross-env NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
+        "dev": "SET NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
         "modules:debug": "./docker/debug.sh",
         "modules:tree": "webpack --config webpack/webpack.config.js --json ",
         "modules:size-analyzer": "webpack --config webpack/webpack.config.js --json | webpack-bundle-size-analyzer",
         "test": "npm run test:coverage",
-        "test:unit": "NODE_ENV=test nyc mocha test/**/*-test.js",
-        "test:coverage": "NODE_ENV=test nyc --reporter=text-lcov mocha test/**/*-test.js | coveralls",
-        "test:watch": "NODE_ENV=test nyc mocha -w test/**/*-test.js",
-        "lint": "NODE_ENV=test ./node_modules/.bin/eslint src",
-        "lint-fixup": "NODE_ENV=test ./node_modules/.bin/eslint src --ext .js,.jsx --fix"
+        "test:unit": "SET NODE_ENV=test nyc mocha test/**/*-test.js",
+        "test:coverage": "SET NODE_ENV=test nyc --reporter=text-lcov mocha test/**/*-test.js | coveralls",
+        "test:watch": "SET NODE_ENV=test nyc mocha -w test/**/*-test.js",
+        "lint": "SET NODE_ENV=test ./node_modules/.bin/eslint src",
+        "lint-fixup": "SET NODE_ENV=test ./node_modules/.bin/eslint src --ext .js,.jsx --fix"
     },
     "repository": {
         "type": "git",
